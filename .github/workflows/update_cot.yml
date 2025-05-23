@@ -1,1 +1,35 @@
 
+name: Auto Update COT Data
+
+on:
+  schedule:
+    - cron: '0 22 * * 5'  # Every Friday at 22:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update-cot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas requests
+
+      - name: Run update script
+        run: python update_cot.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add *.csv
+          git commit -m "🔄 Weekly COT data update" || echo "No changes to commit"
+          git push
+
