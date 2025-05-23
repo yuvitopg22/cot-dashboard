@@ -1,10 +1,9 @@
-
 name: Auto Update COT Data
 
 on:
   schedule:
     - cron: '0 22 * * 5'  # Every Friday at 22:00 UTC
-  workflow_dispatch:
+  workflow_dispatch:      # Allows manual run
 
 jobs:
   update-cot:
