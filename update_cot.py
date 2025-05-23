@@ -34,7 +34,7 @@ with zipfile.ZipFile(BytesIO(r.content)) as z:
     for name in z.namelist():
         if name.endswith(".txt"):
             with z.open(name) as f:
-                df_raw = pd.read_csv(f, delimiter="\t", engine="python")
+                df_raw = pd.read_csv(f)
                 break
 
 # Standardize columns
