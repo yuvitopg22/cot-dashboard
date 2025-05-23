@@ -42,7 +42,7 @@ df_raw.columns = [c.strip() for c in df_raw.columns]
 
 # Clean and export each currency
 for code, label in contracts.items():
-    df = df_raw[df_raw["Market and Exchange Names"] == label].copy()
+   df = df_raw[df_raw["Market_and_Exchange_Name"] == label].copy()
     df["Report_Date_as_YYYY-MM-DD"] = pd.to_datetime(df["Report_Date_as_YYYY-MM-DD"])
 
     df_cleaned = pd.DataFrame({
