@@ -36,42 +36,22 @@ def draw_chart(df, title):
 
     st.plotly_chart(fig, use_container_width=True)
 
-# Define tabs
-tabs = st.tabs("USD Index", "Euro FX", "British Pound", "Japanese Yen", "Swiss Franc", "Canadian Dollar", "Australian Dollar", "New Zealand Dollar", "Mexican Peso")
+# Define currency data
+currencies = [
+    ("USD Index", "usd_cot_cleaned.csv"),
+    ("Euro FX", "euro_fx_cot_cleaned.csv"),
+    ("British Pound", "british_pound_sterling_cot_cleaned.csv"),
+    ("Japanese Yen", "japanese_yen_cot_cleaned.csv"),
+    ("Swiss Franc", "swiss_franc_cot_cleaned.csv"),
+    ("Canadian Dollar", "canadian_dollar_cot_cleaned.csv"),
+    ("Australian Dollar", "australian_dollar_cot_cleaned.csv"),
+    ("New Zealand Dollar", "new_zealand_dollar_cot_cleaned.csv"),
+    ("Mexican Peso", "mexican_peso_cot_cleaned.csv")
+]
 
+tabs = st.tabs([name for name, _ in currencies])
 
-with tabs[0]:
-    df = load_data("usd_cot_cleaned.csv")
-    draw_chart(df, "USD Index")
-
-with tabs[1]:
-    df = load_data("euro_fx_cot_cleaned.csv")
-    draw_chart(df, "Euro FX")
-
-with tabs[2]:
-    df = load_data("british_pound_sterling_cot_cleaned.csv")
-    draw_chart(df, "British Pound")
-
-with tabs[3]:
-    df = load_data("japanese_yen_cot_cleaned.csv")
-    draw_chart(df, "Japanese Yen")
-
-with tabs[4]:
-    df = load_data("swiss_franc_cot_cleaned.csv")
-    draw_chart(df, "Swiss Franc")
-
-with tabs[5]:
-    df = load_data("canadian_dollar_cot_cleaned.csv")
-    draw_chart(df, "Canadian Dollar")
-
-with tabs[6]:
-    df = load_data("australian_dollar_cot_cleaned.csv")
-    draw_chart(df, "Australian Dollar")
-
-with tabs[7]:
-    df = load_data("new_zealand_dollar_cot_cleaned.csv")
-    draw_chart(df, "New Zealand Dollar")
-
-with tabs[8]:
-    df = load_data("mexican_peso_cot_cleaned.csv")
-    draw_chart(df, "Mexican Peso")
+for i, (name, file) in enumerate(currencies):
+    with tabs[i]:
+        df = load_data(file)
+        draw_chart(df, name)
